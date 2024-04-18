@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: udemy-spring-mongo-mvc
+
+  data:
+    mongodb:
+      username: root
+      password: admin
+      database: aliboucoding
+      host: localhost
+      port: 27017
+      authentication-database: admin
