@@ -1,0 +1,38 @@
+package kr.co.won.udemyspringmongomvc.product;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Slf4j
+@RestController
+@RequestMapping(path = "/api/v1/products")
+@RequiredArgsConstructor
+public class ProductController {
+
+    private final ProductService productService;
+
+    @PostMapping
+    public ResponseEntity<String> save(@RequestBody Product product) {
+        return ResponseEntity.ok(productService.save(product));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Product>> findAll() {
+        return ResponseEntity.ok(productService.findAll());
+    }
+
+    @GetMapping(path = "/{product-id}")
+    public ResponseEntity<Product> findById(@PathVariable(name = "product-id") String id) {
+        return ResponseEntity.ok(productService.findById(id));
+    }
+
+    @DeleteMapping(path = "/{product-id}")
+    public ResponseEntity<Void> deleteById(@PathVariable(name = "product-id") String id) {
+        productService.deleteById(id);
+        return ResponseEntity.accepted().build();
+    }
+}

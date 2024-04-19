@@ -14,18 +14,21 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public String save(Product product) {
-        return null;
+        // TODO use a DTO
+        // TODO validate the objects
+        return productRepository.save(product).getId();
     }
 
     public Product findById(String id) {
-        return null;
+        return productRepository.findById(id)
+                .orElse(null);
     }
 
     public List<Product> findAll() {
-        return List.of();
+        return productRepository.findAll();
     }
 
     public void deleteById(String id) {
-
+        productRepository.deleteById(id);
     }
 }
