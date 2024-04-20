@@ -1,0 +1,25 @@
+### product save testing -> using request body
+POST http://localhost:8080/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "sample product",
+  "description": "sample testing"
+}
+
+> {%
+client.global.set("product-id", response.body);
+ %}
+
+### product all list -> using get
+GET http://localhost:8080/api/v1/products
+Content-Type: application/json
+
+
+### product get specific product
+GET http://localhost:8080/api/v1/products/{{product-id}}
+Content-Type: application/json
+
+### product delete by id
+DELETE http://localhost:8080/api/v1/products/{{product-id}}
+Content-Type: application/json
