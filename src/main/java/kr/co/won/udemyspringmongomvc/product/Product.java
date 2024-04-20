@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import kr.co.won.udemyspringmongomvc.category.Category;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -18,4 +21,8 @@ public class Product {
     private String name;
 
     private String description;
+
+    private List<String> tags;
+
+    private Category category;
 }
