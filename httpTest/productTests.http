@@ -36,3 +36,21 @@ Content-Type: application/json
     "Tag 2"
   ]
 }
+
+### create product with category
+POST http://localhost:8080/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "Somart Phone",
+  "description": "Galaxy S21",
+  "tags": [
+    "Tag 1",
+    "Tag 2"
+  ],
+  "category": {
+    "name": "phone",
+    "description": "Some cat description"
+  }
+}
+

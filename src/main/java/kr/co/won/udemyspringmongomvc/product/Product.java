@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import kr.co.won.udemyspringmongomvc.category.Category;
 
@@ -24,5 +25,6 @@ public class Product {
 
     private List<String> tags;
 
+    @DBRef
     private Category category;
 }
