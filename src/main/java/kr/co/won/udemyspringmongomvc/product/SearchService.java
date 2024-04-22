@@ -1,11 +1,13 @@
 package kr.co.won.udemyspringmongomvc.product;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -31,6 +33,27 @@ public class SearchService {
     public List<Product> searchByNameEndingWith(String name) {
         Query query = new Query();
         query.addCriteria(Criteria.where("name").regex(name + "$"));
+        List<Product> products = template.find(query, Product.class);
+        return products;
+    }
+
+    public List<Product> searchByPriceLittle(BigDecimal price) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("price").lt(price));
+        List<Product> products = template.find(query, Product.class);
+        return products;
+    }
+
+    public List<Product> searchByPriceGreaterThan(BigDecimal price) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("price").gt(price));
+        List<Product> products = template.find(query, Product.class);
+        return products;
+    }
+
+    public List<Product> sortByField(String fieldName) {
+        Query query = new Query();
+        query.with(Sort.by(Sort.Direction.ASC, fieldName));
         List<Product> products = template.find(query, Product.class);
         return products;
     }
