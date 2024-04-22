@@ -20,4 +20,18 @@ public class SearchService {
         List<Product> products = template.find(query, Product.class);
         return products;
     }
+
+    public List<Product> searchByNameStartingWith(String name) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").regex("^" + name));
+        List<Product> products = template.find(query, Product.class);
+        return products;
+    }
+
+    public List<Product> searchByNameEndingWith(String name) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").regex(name + "$"));
+        List<Product> products = template.find(query, Product.class);
+        return products;
+    }
 }

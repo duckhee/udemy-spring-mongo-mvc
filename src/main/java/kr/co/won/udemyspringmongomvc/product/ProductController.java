@@ -2,6 +2,7 @@ package kr.co.won.udemyspringmongomvc.product;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +41,18 @@ public class ProductController {
     @GetMapping(path = "/search/is")
     public ResponseEntity<List<Product>> searchByName(@RequestParam(name = "name") String name) {
         List<Product> products = searchService.searchByName(name);
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping(path = "/search/starts-with")
+    public ResponseEntity<List<Product>> searchByNameStartsWith(@RequestParam(name = "name") String name) {
+        List<Product> products = searchService.searchByNameStartingWith(name);
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping(path = "/search/ends-with")
+    public ResponseEntity<List<Product>> searchByNameEndsWith(@RequestParam(name = "name") String name) {
+        List<Product> products = searchService.searchByNameEndingWith(name);
         return ResponseEntity.ok(products);
     }
 }
