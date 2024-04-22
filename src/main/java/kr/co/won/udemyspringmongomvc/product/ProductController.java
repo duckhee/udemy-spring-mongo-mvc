@@ -14,6 +14,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final SearchService searchService;
 
     @PostMapping
     public ResponseEntity<String> save(@RequestBody Product product) {
@@ -34,5 +35,11 @@ public class ProductController {
     public ResponseEntity<Void> deleteById(@PathVariable(name = "product-id") String id) {
         productService.deleteById(id);
         return ResponseEntity.accepted().build();
+    }
+
+    @GetMapping(path = "/search/is")
+    public ResponseEntity<List<Product>> searchByName(@RequestParam(name = "name") String name) {
+        List<Product> products = searchService.searchByName(name);
+        return ResponseEntity.ok(products);
     }
 }
