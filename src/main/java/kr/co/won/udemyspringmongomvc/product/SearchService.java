@@ -1,6 +1,8 @@
 package kr.co.won.udemyspringmongomvc.product;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -54,6 +56,14 @@ public class SearchService {
     public List<Product> sortByField(String fieldName) {
         Query query = new Query();
         query.with(Sort.by(Sort.Direction.ASC, fieldName));
+        List<Product> products = template.find(query, Product.class);
+        return products;
+    }
+
+    public List<Product> sortByPagingField(String fieldName, int page, int size) {
+        Query query = new Query();
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, fieldName));
+        query.with(pageable);
         List<Product> products = template.find(query, Product.class);
         return products;
     }

@@ -74,4 +74,10 @@ public class ProductController {
         List<Product> products = searchService.sortByField(field);
         return ResponseEntity.ok(products);
     }
+
+    @GetMapping(path = "/sort-page")
+    public ResponseEntity<List<Product>> sortByProductPage(@RequestParam(name = "field") String field, @RequestParam(name = "page") int page, @RequestParam(name = "size") int size) {
+        List<Product> products = searchService.sortByPagingField(field, page, size);
+        return ResponseEntity.ok(products);
+    }
 }
