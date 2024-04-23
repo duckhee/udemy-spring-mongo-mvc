@@ -1,5 +1,6 @@
 package kr.co.won.udemyspringmongomvc.product;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.math.BigDecimal;
@@ -51,5 +52,19 @@ public interface ProductRepository extends MongoRepository<Product, String> {
      * min < database data < max
      */
     List<Product> findAllByPriceBetween(BigDecimal min, BigDecimal max);
+
+    /**
+     * 해당 되는 단어를 포함하고 있는 모든 값을 찾아 와서 이름 값으로 오름차순 정렬 것
+     * regex
+     * => /^productName$/i order by price desc
+     */
+    List<Product> findAllByNameContainingIgnoreCaseOrderByPriceDesc(String productName);
+
+    /**
+     * 해당 되는 단어를 포함하고 있는 모든 값을 찾아 와서 이름 값으로 오름차 순 정렬로 pagination 형태로 가져오기
+     * regex
+     * => /^productName$/i order by price desc
+     */
+    List<Product> findAllByNameContainingIgnoreCaseOrderByPriceDesc(String productName, Pageable pageable);
 
 }

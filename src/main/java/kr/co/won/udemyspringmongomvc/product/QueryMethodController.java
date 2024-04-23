@@ -61,14 +61,14 @@ public class QueryMethodController {
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping(path = "/sort/asc")
+    @GetMapping(path = "/sort/desc")
     public ResponseEntity<List<Product>> sortByProduct(@RequestParam(name = "field") String field) {
-        List<Product> products = queryMethodService.sortByField(field);
+        List<Product> products = queryMethodService.sortAndSortASCField(field);
         return ResponseEntity.ok(products);
     }
 
     @GetMapping(path = "/sort-page")
-    public ResponseEntity<List<Product>> sortByProductPage(@RequestParam(name = "field") String field, @RequestParam(name = "page") int page, @RequestParam(name = "size") int size) {
+    public ResponseEntity<List<Product>> sortByProductPage(@RequestParam(name = "field") String field, @RequestParam(name = "page", required = false, defaultValue = "0") int page, @RequestParam(name = "size", required = false, defaultValue = "2") int size) {
         List<Product> products = queryMethodService.sortByPagingField(field, page, size);
         return ResponseEntity.ok(products);
     }

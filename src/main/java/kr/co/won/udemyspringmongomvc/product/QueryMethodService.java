@@ -1,6 +1,8 @@
 package kr.co.won.udemyspringmongomvc.product;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -40,11 +42,12 @@ public class QueryMethodService {
         return repository.findAllByPriceBetween(min, max);
     }
 
-    public List<Product> sortByField(String fieldName) {
-        return null;
+    public List<Product> sortAndSortASCField(String productName) {
+        return repository.findAllByNameContainingIgnoreCaseOrderByPriceDesc(productName);
     }
 
     public List<Product> sortByPagingField(String fieldName, int page, int size) {
-        return null;
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("price").descending());
+        return repository.findAllByNameContainingIgnoreCaseOrderByPriceDesc(fieldName, pageRequest);
     }
 }
